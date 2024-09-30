@@ -12,6 +12,7 @@ with open('recipes.txt', 'r', encoding='utf-8') as f:
         ingredient = {'ingredient_name': ingredient_name, 'quantity': quantity, 'measure': measure}
         ingredients.append(ingredient)
     cook_book.update({bludo : ingredients})
+#
 print(cook_book)
 
 # cook_book = {
