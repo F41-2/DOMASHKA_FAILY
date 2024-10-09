@@ -21,9 +21,12 @@ def get_shop_list_by_dishes(dishes, person_count):
         for a in cook_book.get(n):
           b = a.copy()
           b.pop('ingredient_name')
-          b['quantity'] = int(b['quantity'])*person_count
+          if a['ingredient_name'] not in list_bludo:
+            b['quantity'] = int(b['quantity'])*person_count
+          else:
+            b['quantity'] = int(b['quantity'])*person_count+list_bludo[a.get('ingredient_name')]['quantity']
           list_bludo.update({a.get('ingredient_name') : b})
+          # print(list_bludo[a.get('ingredient_name')]['quantity'])
   return list_bludo
 
-print(get_shop_list_by_dishes(['Запеченный картофель', 'Омлет'], 2))
-# print(get_shop_list_by_dishes(['Омлет', 'Омлет'], 2))
+print(get_shop_list_by_dishes(['Омлет', 'Омлет', 'Запеченный картофель'], 3))

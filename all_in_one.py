@@ -1,27 +1,22 @@
-len_1 = 0; len_2 = 0; len_3 = 0; file_1 = []; file_2 = []; file_3 = []
+import os
+os.chdir('allinone')
+len_f = 0; file = {}
+if os.path.exists("all_in_one.txt"):
+    print('Файл уже объединялся')
+else:
+    for x in os.listdir():
+        if x.endswith(".txt"):
+            with open(x, 'r', encoding='utf-8') as f:
+                for line in f:
+                    len_f += 1
+                file[len_f] = x
+                len_f = 0
+            sorted_file = sorted(((k,v) for k, v in file.items()), reverse=False)
 
-with open('1.txt', 'r', encoding='utf-8') as f:
-    for line in f:
-        len_1 += 1
-        file_1.append(line.strip())
-with open('2.txt', 'r', encoding='utf-8') as f:
-    for line in f:
-        len_2 += 1
-        file_2.append(line.strip())
-with open('3.txt', 'r', encoding='utf-8') as f:
-    for line in f:
-        len_3 += 1
-        file_3.append(line.strip())
-with open('all_in_one.txt', 'a', encoding='utf-8') as f:
-    f.write(f'Файл 2.txt\nВ нем {len_2} строк(а)\n')
-    for n in file_2:
-        f.write(f'{n}\n')
-    f.write(f'\nФайл 1.txt\nВ нем {len_1} строк(а)\n')
-    for n in file_1:
-        f.write(f'{n}\n')
-    f.write(f'\nФайл 3.txt\nВ нем {len_3} строк(а)\n')
-    for n in file_3:
-        f.write(f'{n}\n')
-
-# Цитата из задания: Считайте, что их количество и имена вам заранее известны
-# т.е. мне не нужно проводить махинации с определением порядка, так ведь?
+    for m in sorted_file:
+        name = m[1]
+        with open('all_in_one.txt', 'a', encoding='utf-8') as x:
+            x.write(f'\n{m[1]}\nВ нем {m[0]} строк(а)\n\n')
+            with open(name, 'r', encoding='utf-8') as j:
+                for line in j:
+                    x.write(f'{line.strip()}\n')
